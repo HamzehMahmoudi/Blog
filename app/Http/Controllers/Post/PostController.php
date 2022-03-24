@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -24,7 +25,8 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
+        $post->slug = Str::slug($request->title);
         $post->save();
-        return redirect()->route('posts.index');
+        return redirect()->route('posts');
     }
 }
