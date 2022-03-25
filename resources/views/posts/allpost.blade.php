@@ -4,7 +4,6 @@
     <div>
         @if(auth()->user() && auth()->user()->admin)
                 <div class="flex justify-center">
-                    you are admin you can create a post
                     <div class="w-4/12 bg-white p-6 rounded-lg flex justify-center">
                         <form action="{{ route('posts') }}" method="post">
                             @csrf
@@ -37,17 +36,41 @@
                 </div>
         @endif
     </div>
-    <div class="grid grid-flow-col auto-cols-max">
-        @foreach ( $posts as $post)
-            <div class="">
-                    <div class="px-6 py-4">
-                        <div class="">{{$post->title}}</div>
-                        <p class="">
-                            {{ \Illuminate\Support\Str::limit($post->body, 35, $end='...') }}
-                        </p>
-                    </div>
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4 rounded-lg">
+            @foreach ( $posts as $post)
+                <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 ">
+                    <article class="overflow-hidden rounded-lg bg-white shadow-lg">
+                        <img alt="Placeholder" class="block h-auto w-full " src="https://picsum.photos/600/400/?random">
+                            {{-- card  --}}
+                            <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                                <h1 class="text-lg">
+                                    <a class="no-underline hover:underline text-black" href="#">
+                                        {{$post->title}}
+                                    </a>
+                                </h1>
+                                <p class="text-grey-darker text-sm">
+                                    {{$post->created_at->diffForHumans()}}
+                                </p>
+                                {{-- <p class="flex justify">
+                                    {{\Illuminate\Support\Str::limit($post->body, 20, "...")}}
+                                </p> --}}
+                            </header>
+                            <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                                <div class="flex items-center no-underline hover:underline text-black" href="#">
+                                    <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
+                                    <p class="ml-2 text-sm">
+                                        {{App\Models\User::find($post->user_id)->name}}
+                                    </p>
+                                </div>
+                                <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                                    <span class="hidden">Like</span>
+                                    <i class="fa fa-heart"></i>
+                                </a>
+                            </footer>
+                    </article>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 @endsection
