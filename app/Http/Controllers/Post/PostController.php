@@ -21,12 +21,11 @@ class PostController extends Controller
             'title' => 'required',
             'body' => 'required',
         ]);
-        $post = new Post;
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->user_id = auth()->user()->id;
-        $post->slug = Str::slug($request->title);
-        $post->save();
-        return redirect()->route('posts');
+        $request->user()->posts()->create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'slug' => Str::slug($request->title)
+        ]);
+        return back();
     }
 }

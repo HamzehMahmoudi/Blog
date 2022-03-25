@@ -52,10 +52,12 @@
                                 <p class="text-grey-darker text-sm">
                                     {{$post->created_at->diffForHumans()}}
                                 </p>
-                                {{-- <p class="flex justify">
-                                    {{\Illuminate\Support\Str::limit($post->body, 20, "...")}}
-                                </p> --}}
                             </header>
+                            <div class="flex items-center justify-between leading-none p-2 md:p-4">
+                                <div class="flex items-center no-underline hover:underline text-black">
+                                    <p>{{\Illuminate\Support\Str::limit($post->body, 35, "...")}}</p>
+                                </div>
+                            </div>
                             <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                                 <div class="flex items-center no-underline hover:underline text-black" href="#">
                                     <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
