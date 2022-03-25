@@ -62,7 +62,7 @@
                                 <div class="flex items-center no-underline hover:underline text-black" href="#">
                                     <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
                                     <p class="ml-2 text-sm">
-                                        {{App\Models\User::find($post->user_id)->name}}
+                                        {{$post->user->name}}
                                     </p>
                                 </div>
                                 <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
@@ -74,5 +74,7 @@
                 </div>
             @endforeach
         </div>
+        {{$posts->links()}}
     </div>
+
 @endsection

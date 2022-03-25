@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(3);
         return view('posts.allpost', ['posts' => $posts]);
     }
 
@@ -24,7 +24,7 @@ class PostController extends Controller
         $request->user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
-            'slug' => Str::slug($request->title)
+            'slug' => Str::slug($request->title.'-'.Str::limit($request->body, 10)),
         ]);
         return back();
     }
