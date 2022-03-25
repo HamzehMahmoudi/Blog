@@ -20,3 +20,6 @@ Route::get('/auth/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
 Route::post('/posts',[PostController::class, 'create']);
 Route::get('/posts/{slug}',[PostController::class, 'show'])->name('show');
+Route::get('/posts/edit/{slug}',[PostController::class, 'editpage'])->name('edit');
+Route::post('/posts/edit/{slug}',[PostController::class, 'edit']);
+Route::get('/posts/delete/{slug}',[PostController::class, 'delete'])->name('delete');

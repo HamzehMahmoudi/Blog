@@ -1,9 +1,4 @@
 @extends('layout.base')
-@section('styles')
-  <script src="https://cdn.tiny.cloud/1/g65o16facumsrood8wd4dlvfosezmcjhzbpjze1sq3i248gy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script>tinymce.init({ selector:'textarea' });</script>
-</html>
-@endsection
 @section('content')
     <div>
         @if(auth()->user() && auth()->user()->admin)
@@ -58,9 +53,9 @@
                                 </p>
                             </header>
                             <div class="flex items-center justify-between leading-none p-2 md:p-4">
-                                <div class="flex items-center no-underline hover:underline text-black">
-                                    <p>{!! \Illuminate\Support\Str::limit($post->body, 35, "...") !!}</p>
-                                </div>
+                                {{-- <div class="flex items-center no-underline hover:underline text-black">
+                                    <p>{{ \Illuminate\Support\Str::limit($post->body, 35, "...") }}</p>
+                                </div> --}}
                             </div>
                             <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                                 <div class="flex items-center no-underline hover:underline text-black" href="">

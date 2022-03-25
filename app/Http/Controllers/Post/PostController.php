@@ -33,4 +33,28 @@ class PostController extends Controller
         $post = Post::where('slug', $slug)->firstOrFail();
         return view('posts.post', ['post' => $post]);
     }
+    public function editpage($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('posts.edit', ['post' => $post]);
+    }
+    public function edit(Request $request, $slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->slug = Str::slug($request->title.'-'.Str::limit($request->body, 10));
+        $post->save();
+        return redirect()->route('show', $post->slug);
+    }
+    public function delete($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $post->delete();
+        return redirect()->route('posts');;
+    }
 }
