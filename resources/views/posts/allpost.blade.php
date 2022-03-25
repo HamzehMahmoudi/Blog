@@ -1,10 +1,14 @@
 @extends('layout.base')
-
+@section('styles')
+  <script src="https://cdn.tiny.cloud/1/g65o16facumsrood8wd4dlvfosezmcjhzbpjze1sq3i248gy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>
+</html>
+@endsection
 @section('content')
     <div>
         @if(auth()->user() && auth()->user()->admin)
                 <div class="flex justify-center">
-                    <div class="w-4/12 bg-white p-6 rounded-lg flex justify-center">
+                    <div class=" bg-white p-6 rounded-lg flex justify-center">
                         <form action="{{ route('posts') }}" method="post">
                             @csrf
                             <div class="mb-4">
@@ -55,7 +59,7 @@
                             </header>
                             <div class="flex items-center justify-between leading-none p-2 md:p-4">
                                 <div class="flex items-center no-underline hover:underline text-black">
-                                    <p>{{\Illuminate\Support\Str::limit($post->body, 35, "...")}}</p>
+                                    <p>{!! \Illuminate\Support\Str::limit($post->body, 35, "...") !!}</p>
                                 </div>
                             </div>
                             <footer class="flex items-center justify-between leading-none p-2 md:p-4">
