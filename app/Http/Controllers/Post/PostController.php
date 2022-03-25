@@ -28,4 +28,9 @@ class PostController extends Controller
         ]);
         return back();
     }
+    public function show($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('posts.post', ['post' => $post]);
+    }
 }

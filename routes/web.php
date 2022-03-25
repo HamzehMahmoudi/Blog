@@ -19,3 +19,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/auth/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
 Route::post('/posts',[PostController::class, 'create']);
+Route::get('/posts/{slug}',[PostController::class, 'show'])->name('show');

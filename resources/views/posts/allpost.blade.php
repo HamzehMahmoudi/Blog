@@ -45,7 +45,7 @@
                             {{-- card  --}}
                             <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                                 <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="#">
+                                    <a class="no-underline hover:underline text-black" href="{{route('show',$post->slug)}}">
                                         {{$post->title}}
                                     </a>
                                 </h1>
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                                <div class="flex items-center no-underline hover:underline text-black" href="#">
+                                <div class="flex items-center no-underline hover:underline text-black" href="">
                                     <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
                                     <p class="ml-2 text-sm">
                                         {{$post->user->name}}
@@ -76,5 +76,4 @@
         </div>
         {{$posts->links()}}
     </div>
-
 @endsection

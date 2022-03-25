@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        <h1>{{$post->title}}</h1>
+        {{Illuminate\Mail\Markdown::parse(e($post->body))}}
     </div>
 @endsection
