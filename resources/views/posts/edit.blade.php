@@ -1,5 +1,15 @@
 @extends('layout.base')
-
+@section('style')
+<script src="https://cdn.tiny.cloud/1/g65o16facumsrood8wd4dlvfosezmcjhzbpjze1sq3i248gy/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>    tinymce.init({
+  selector: 'textarea',
+  plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+  toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+  toolbar_mode: 'floating',
+  tinycomments_mode: 'embedded',
+  tinycomments_author: 'Author name',
+});</script>
+@endsection
 @section('content')
 <div class="flex justify-center">
     <div class=" bg-white p-6 rounded-lg flex justify-center">
@@ -18,7 +28,8 @@
 
             <div class="mb-4">
                 <label for="body" class="sr-only">Body</label>
-                <textarea  name="body" id="body" placeholder="Body" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('body') border-red-500 @enderror" value="{{ $post->body }}">
+                <textarea  name="body" id="body" placeholder="Body" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('body') border-red-500 @enderror">
+                    {!! $post->body !!}
                 </textarea>
                 @error('body')
                     <div class="text-red-500 mt-2 text-sm">

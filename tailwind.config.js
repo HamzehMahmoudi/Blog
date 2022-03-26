@@ -6,13 +6,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            
-          },
-        },
-      }),
     },
   },
   plugins: [

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Str;
-
 class PostController extends Controller
 {
     public function index()
@@ -24,7 +23,7 @@ class PostController extends Controller
         $request->user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
-            'slug' => Str::slug($request->title.'-'.Str::limit($request->body, 10)),
+            'slug' => Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10)),
         ]);
         return back();
     }
@@ -47,7 +46,7 @@ class PostController extends Controller
         ]);
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->slug = Str::slug($request->title.'-'.Str::limit($request->body, 10));
+        $post->slug = Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10));
         $post->save();
         return redirect()->route('show', $post->slug);
     }

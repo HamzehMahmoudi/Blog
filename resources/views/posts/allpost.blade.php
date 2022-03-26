@@ -53,9 +53,9 @@
                                 </p>
                             </header>
                             <div class="flex items-center justify-between leading-none p-2 md:p-4">
-                                {{-- <div class="flex items-center no-underline hover:underline text-black">
-                                    <p>{{ \Illuminate\Support\Str::limit($post->body, 35, "...") }}</p>
-                                </div> --}}
+                                <div class="flex items-center no-underline hover:underline text-black">
+                                    <p>{{ \Illuminate\Support\Str::limit(strip_tags($post->body), 35, "...") }}</p>
+                                </div>
                             </div>
                             <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                                 <div class="flex items-center no-underline hover:underline text-black" href="">
