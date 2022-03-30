@@ -14,4 +14,9 @@ class Postpolicy
 
         return $user->id == $post->user_id;
     }
+
+    public function post(User $user){
+
+        return $user->admin == 1;
+    }
 }

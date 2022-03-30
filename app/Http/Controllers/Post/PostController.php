@@ -16,6 +16,7 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
+        $this->authorize('post');
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
