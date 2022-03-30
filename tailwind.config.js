@@ -6,6 +6,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+        typography:{
+            DEFAULT:{
+                css: {
+                    p:{
+                        color: '#000000'
+                    },
+                },
+            },
+        },
     },
   },
   plugins: [

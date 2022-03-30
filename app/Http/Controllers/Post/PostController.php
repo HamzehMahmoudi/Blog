@@ -40,6 +40,7 @@ class PostController extends Controller
     public function edit(Request $request, $slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+        $this->authorize('change', $post);
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
@@ -53,6 +54,7 @@ class PostController extends Controller
     public function delete($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+        $this->authorize('change', $post);
         $post->delete();
         return redirect()->route('posts');;
     }
