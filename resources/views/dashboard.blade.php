@@ -35,7 +35,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="flex flex-wrap mt-8 rounded-lg shadow-md">
+            <div class="mt-8">
                 {{$posts->links()}}
             </div>
 

@@ -1046,6 +1046,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100%;
 }
+.w-8 {
+  width: 2rem;
+}
+.w-1\/12 {
+  width: 8.333333%;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-11 {
+  width: 2.75rem;
+}
+.w-12 {
+  width: 3rem;
+}
 .table-fixed {
   table-layout: fixed;
 }
@@ -1266,6 +1281,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:rounded-lg {
     border-radius: 0.5rem;
+  }
+
+  .sm\:rounded-sm {
+    border-radius: 0.125rem;
   }
 }
 @media (min-width: 768px) {
