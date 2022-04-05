@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class DashboardController extends Controller
 {
@@ -11,8 +12,9 @@ class DashboardController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard');
+        $posts = Post::where('user_id', $request->user()->id)->paginate(10);
+        return view('dashboard', ['posts' => $posts]);
     }
 }
