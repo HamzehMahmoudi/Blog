@@ -15,7 +15,7 @@
         @if(auth()->user() && auth()->user()->admin)
                 <div class="flex justify-center">
                     <div class=" bg-white p-6 rounded-lg flex justify-center">
-                        <form action="{{ route('posts') }}" method="post">
+                        <form action="{{ route('posts') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
                                 <label for="title" class="sr-only">Title</label>
@@ -39,6 +39,16 @@
                                     </div>
                                 @enderror
                             </div>
+                            <div class="mb-4">
+                                <label for="image_url" class="sr-only">Title</label>
+                                <input type="file" name="image_url" id="image_url" placeholder="image_url" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('image_url') border-red-500 @enderror" value="{{ old('image_url') }}">
+
+                                @error('image_url')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div>
                                 <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Post</button>
                             </div>
@@ -52,7 +62,7 @@
             @foreach ( $posts as $post)
                 <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 ">
                     <article class="overflow-hidden rounded-lg bg-white shadow-lg">
-                        <img alt="Placeholder" class="block h-auto w-full " src="https://picsum.photos/600/400/?random">
+                        <img alt="Placeholder" class="block h-auto w-full " src="{{ asset($post->image_url) }}">
                             <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                                 <h1 class="text-lg">
                                     <a class="no-underline hover:underline text-black" href="{{route('show',$post)}}">

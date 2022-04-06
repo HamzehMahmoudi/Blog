@@ -37,6 +37,15 @@
                     </div>
                 @enderror
             </div>
+            <div class="mb-4">
+                <label for="image_url" class="sr-only">Title</label>
+                <input type="file" name="image_url" id="image_url" placeholder="image_url" class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('image_url') border-red-500 @enderror" value={{ $post->image_url }}>
+                @error('image_url')
+                    <div class="text-red-500 mt-2 text-sm">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
             <div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Post</button>
             </div>

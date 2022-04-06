@@ -21,11 +21,26 @@ class PostController extends Controller
             'title' => 'required',
             'body' => 'required',
         ]);
-        $request->user()->posts()->create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'slug' => Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10)),
-        ]);
+        if ($request->hasFile('image_url')){
+            $request->validate([
+                'image_url' => 'image|mimes:jpeg,png,jpg',
+            ]);
+            $imname = $request->file('image_url')->hashName();
+            $path = $request->file('image_url')->storeAs('images', $imname, 'public');
+            $request->user()->posts()->create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'slug' => Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10)),
+                'image_url' => 'storage/'.$path,
+            ]);
+        }
+        else{
+            $request->user()->posts()->create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'slug' => Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10)),
+            ]);
+        }
         return back();
     }
     public function show(Post $post)
@@ -43,10 +58,21 @@ class PostController extends Controller
             'title' => 'required',
             'body' => 'required',
         ]);
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->slug = Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10));
-        $post->save();
+        if ($request->hasFile('image_url')){
+            $request->validate([
+                'image_url' => 'image|mimes:jpeg,png,jpg',
+            ]);
+            $imname = $request->file('image_url')->hashName();
+            $path = $request->file('image_url')->storeAs('images', $imname, 'public');
+            $post->image_url = 'storage/'.$path;
+        }
+        else{
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->slug = Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10));
+            $post->save();
+        }
+
         return redirect()->route('show', $post);
     }
     public function delete(Post $post)
@@ -56,3 +82,4 @@ class PostController extends Controller
         return redirect()->route('posts');;
     }
 }
+// TODO: resize images then save and set default image
