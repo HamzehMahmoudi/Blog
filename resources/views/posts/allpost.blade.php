@@ -55,7 +55,7 @@
                         <img alt="Placeholder" class="block h-auto w-full " src="https://picsum.photos/600/400/?random">
                             <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                                 <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="{{route('show',$post->slug)}}">
+                                    <a class="no-underline hover:underline text-black" href="{{route('show',$post)}}">
                                         {{$post->title}}
                                     </a>
                                 </h1>

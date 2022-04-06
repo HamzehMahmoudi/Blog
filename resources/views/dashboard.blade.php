@@ -19,15 +19,15 @@
                         @foreach ($posts as $post)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    <a href="{{route('show',$post->slug)}}">{{$post->title}}</a>
+                                    <a href="{{route('show',$post)}}">{{$post->title}}</a>
                                 </th>
                                 <td class="px-6 py-4">
                                     <p>{{ \Illuminate\Support\Str::limit(strip_tags($post->body), 35, "...") }}</p>
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     @can('change', $post)
-                                        <a href="{{route('edit',$post->slug)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-2 ">edit</a>
-                                        <a href="{{route('delete',$post->slug)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-2">delete</a>
+                                        <a href="{{route('edit',$post)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-2 ">edit</a>
+                                        <a href="{{route('delete',$post)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-2">delete</a>
                                     @endcan
                                 </td>
                             </tr>

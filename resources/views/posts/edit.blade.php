@@ -13,7 +13,7 @@
 @section('content')
 <div class="flex justify-center">
     <div class=" bg-white p-6 rounded-lg flex justify-center">
-        <form action="{{ route('edit',$post->slug) }}" method="post">
+        <form action="{{ route('edit',$post) }}" method="post">
             @csrf
             <div class="mb-4">
                 <label for="title" class="sr-only">Title</label>

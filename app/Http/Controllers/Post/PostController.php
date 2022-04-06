@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-        $this->authorize('post');
+        $this->authorize('post',Post::class);
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
@@ -28,19 +28,16 @@ class PostController extends Controller
         ]);
         return back();
     }
-    public function show($slug)
+    public function show(Post $post)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
         return view('posts.post', ['post' => $post]);
     }
-    public function editpage($slug)
+    public function editpage(Post $post)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
         return view('posts.edit', ['post' => $post]);
     }
-    public function edit(Request $request, $slug)
+    public function edit(Request $request, Post $post)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
         $this->authorize('change', $post);
         $this->validate($request, [
             'title' => 'required',
@@ -50,11 +47,10 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->slug = Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10));
         $post->save();
-        return redirect()->route('show', $post->slug);
+        return redirect()->route('show', $post);
     }
-    public function delete($slug)
+    public function delete(Post $post)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
         $this->authorize('change', $post);
         $post->delete();
         return redirect()->route('posts');;
