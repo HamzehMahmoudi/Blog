@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 class PostController extends Controller
 {
     public function index()
@@ -25,13 +26,15 @@ class PostController extends Controller
             $request->validate([
                 'image_url' => 'image|mimes:jpeg,png,jpg',
             ]);
+            $image = $request->file('image_url');
             $imname = $request->file('image_url')->hashName();
-            $path = $request->file('image_url')->storeAs('images', $imname, 'public');
+            $resized = Image::make($image)->resize(600, 400);
+            $path = $resized->save(public_path('storage/images/'.$imname));
             $request->user()->posts()->create([
                 'title' => $request->title,
                 'body' => $request->body,
                 'slug' => Str::slug($request->title.'-'.Str::limit(strip_tags(clean($request->body)), 10)),
-                'image_url' => 'storage/'.$path,
+                'image_url' => 'storage/images/'.$path->basename,
             ]);
         }
         else{
@@ -62,9 +65,11 @@ class PostController extends Controller
             $request->validate([
                 'image_url' => 'image|mimes:jpeg,png,jpg',
             ]);
+            $image = $request->file('image_url');
             $imname = $request->file('image_url')->hashName();
-            $path = $request->file('image_url')->storeAs('images', $imname, 'public');
-            $post->image_url = 'storage/'.$path;
+            $resized = Image::make($image)->resize(600, 400);
+            $path = $resized->save(public_path('storage/images/'.$imname));
+            $post->image_url = 'storage/images/'.$path->basename;
         }
         else{
             $post->title = $request->title;
